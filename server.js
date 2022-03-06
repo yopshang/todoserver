@@ -27,9 +27,12 @@ const requestListener = (req, res) => {
         })
     } else if(req.url == "/todos" && req.method == "POST"){
         req.on('end', ()=>{
-            // console.log(JSON.parse(body));
             const title = JSON.parse(body).title;
-            console.log('post title:', title);
+            const todo = {
+                "title": title,
+                "id": uuidv4()
+            }
+            console.log('post todo:', todo);
             res.writeHead(200, headers);
             res.write(JSON.stringify({
                 "status": "success",
