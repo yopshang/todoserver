@@ -31,7 +31,8 @@ const requestListener = (req, res) => {
             const todo = {
                 "title": title,
                 "id": uuidv4()
-            }
+            };
+            todos.push(todo);
             console.log('post todo:', todo);
             res.writeHead(200, headers);
             res.write(JSON.stringify({
