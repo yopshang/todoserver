@@ -27,18 +27,36 @@ const requestListener = (req, res) => {
         })
     } else if(req.url == "/todos" && req.method == "POST"){
         req.on('end', ()=>{
-            const title = JSON.parse(body).title;
-            const todo = {
-                "title": title,
-                "id": uuidv4()
-            };
-            todos.push(todo);
-            console.log('post todo:', todo);
-            res.writeHead(200, headers);
-            res.write(JSON.stringify({
-                "status": "success",
-                "data": todos
-            }));
+            try {
+                const title = JSON.parse(body).title;
+                if(title !== undefined){
+                    const todo = {
+                        "title": title,
+                        "id": uuidv4()
+                    };
+                    todos.push(todo);
+                    console.log('post todo:', todo);
+                    res.writeHead(200, headers);
+                    res.write(JSON.stringify({
+                        "status": "success",
+                        "data": todos
+                    }));
+                } else {
+                    console.log( error, '程式錯誤');
+                    res.writeHead(400, headers);
+                    res.write(JSON.stringify({
+                        "status": "false",
+                        "message": "欄位未填寫正確"
+                    }));
+                }
+            } catch(error){
+                console.log( error, '程式錯誤');
+                res.writeHead(400, headers);
+                res.write(JSON.stringify({
+                    "status": "false",
+                    "message": "格式錯誤"
+                }));
+            }
             res.end();
         })
     }
