@@ -1,9 +1,9 @@
 const {v4: uuidv4} = require('uuid');
-var http = require('http')
+const http = require('http')
+const errorHandle = require('./errorHandle')
 const todos = [];
 
 const requestListener = (req, res) => {
-    // console.log(req.url);
     const headers = {
         'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
         'Access-Control-Allow-Origin': '*',
@@ -42,20 +42,10 @@ const requestListener = (req, res) => {
                         "data": todos
                     }));
                 } else {
-                    console.log( error, '程式錯誤');
-                    res.writeHead(400, headers);
-                    res.write(JSON.stringify({
-                        "status": "false",
-                        "message": "欄位未填寫正確"
-                    }));
+                    errorHandle(res, headers, "欄位未填寫正確")
                 }
             } catch(error){
-                console.log( error, '程式錯誤');
-                res.writeHead(400, headers);
-                res.write(JSON.stringify({
-                    "status": "false",
-                    "message": "格式錯誤"
-                }));
+                errorHandle(res, headers, "資料格式錯誤")
             }
             res.end();
         })
