@@ -17,7 +17,6 @@ const requestListener = (req, res) => {
 
     if(req.url == "/todos" && req.method == "GET"){
         req.on('end', ()=>{
-            console.log(JSON.parse(body));
             res.writeHead(200, headers);
             res.write(JSON.stringify({
                 "status": "success",
@@ -35,7 +34,6 @@ const requestListener = (req, res) => {
                         "id": uuidv4()
                     };
                     todos.push(todo);
-                    console.log('post todo:', todo);
                     res.writeHead(200, headers);
                     res.write(JSON.stringify({
                         "status": "success",
@@ -61,7 +59,6 @@ const requestListener = (req, res) => {
     } else if(req.url.startsWith("/todos/") && req.method == "DELETE"){
         const id = req.url.split('/').pop();
         const index = todos.findIndex(element => element.id == id)
-        console.log(index);
         if(index !== -1){
             todos.splice(index, 1);
             res.writeHead(200, headers);
@@ -76,6 +73,33 @@ const requestListener = (req, res) => {
             errorHandle(res, headers, "查無此筆資料");
             res.end();
         }
+    } else if(req.url.startsWith("/todos/") && req.method == "PATCH"){
+        req.on('end', ()=>{
+            try{
+                const todo = JSON.parse(body).title;
+                const id = req.url.split('/').pop();
+                const index = todos.findIndex(element => element.id == id)
+                if(todos !== undefined && index !== -1){
+                    todos[index].title = todo;
+                    res.write(JSON.stringify({
+                        "status": "success",
+                        "data": todos,
+                        "method": req.method
+                    }));
+                } else {
+                    errorHandle(res, headers, "沒有此筆資料"); 
+                }
+            } catch {
+                errorHandle(res, headers, "編輯錯誤");
+            }
+            res.end();
+        })
+        // res.writeHead(200, headers);
+        // res.write(JSON.stringify({
+        //     "status": "success",
+        //     "data": todos,
+        //     "method": req.method
+        // }));
     } else if (req.method == "OPTIONS"){
         res.writeHead(200, headers);
         res.end();
