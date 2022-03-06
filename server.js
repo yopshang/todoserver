@@ -50,15 +50,14 @@ const requestListener = (req, res) => {
             res.end();
         })
     } else if(req.url == "/todos" && req.method == "DELETE"){
-        req.on('end', ()=>{
-            console.log(JSON.parse(body));
-            res.writeHead(200, headers);
-            res.write(JSON.stringify({
-                "status": "success",
-                "delete": "yes"
-            }));
-            res.end();
-        })
+        todos.length = 0;
+        res.writeHead(200, headers);
+        res.write(JSON.stringify({
+            "status": "success",
+            "data": todos,
+            "delete": "yes"
+        }));
+        res.end();
     }
     else if (req.method == "OPTIONS"){
         res.writeHead(200, headers);
