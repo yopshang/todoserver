@@ -94,12 +94,6 @@ const requestListener = (req, res) => {
             }
             res.end();
         })
-        // res.writeHead(200, headers);
-        // res.write(JSON.stringify({
-        //     "status": "success",
-        //     "data": todos,
-        //     "method": req.method
-        // }));
     } else if (req.method == "OPTIONS"){
         res.writeHead(200, headers);
         res.end();
@@ -114,4 +108,4 @@ const requestListener = (req, res) => {
     }
 }
 const server = http.createServer(requestListener);
-server.listen(3005);
+server.listen(process.env.PORT || 3005);
