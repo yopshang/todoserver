@@ -65,8 +65,7 @@ const requestListener = (req, res) => {
             res.write(JSON.stringify({
                 "status": "success",
                 "data": todos,
-                "delete": "yes",
-                "id": 1
+                "delete": "yes"
             }));
             res.end();
         }else {
@@ -81,6 +80,7 @@ const requestListener = (req, res) => {
                 const index = todos.findIndex(element => element.id == id)
                 if(todos !== undefined && index !== -1){
                     todos[index].title = todo;
+                    res.writeHead(200, headers);
                     res.write(JSON.stringify({
                         "status": "success",
                         "data": todos,
