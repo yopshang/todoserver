@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "fd8a4587-dc5f-427b-bf90-1bd66e0fd786",
+		"name": "todolist-server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "取得所有代辦",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"今天不刷牙\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://nameless-shore-20914.herokuapp.com/todos",
+					"protocol": "https",
+					"host": [
+						"nameless-shore-20914",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增單筆代辦",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"金天不刷牙\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://nameless-shore-20914.herokuapp.com/todos",
+					"protocol": "https",
+					"host": [
+						"nameless-shore-20914",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除所有代辦",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://nameless-shore-20914.herokuapp.com/todos",
+					"protocol": "https",
+					"host": [
+						"nameless-shore-20914",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除單筆代辦",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://nameless-shore-20914.herokuapp.com/todos/",
+					"protocol": "https",
+					"host": [
+						"nameless-shore-20914",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"todos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "編輯代辦",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"測試修改\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://nameless-shore-20914.herokuapp.com/todos/",
+					"protocol": "https",
+					"host": [
+						"nameless-shore-20914",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"todos",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
